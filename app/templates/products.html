@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/#/">_citypics</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Search" class="form-control" ng-model="search">
+              <button type="submit" class="btn search-btn">Go</button>
+            </div>
+
+            <button ng-controller="MainCtrl as Ctrl" class="btn btn-default cart-btn" ng-click="Ctrl.viewCart()"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> View Cart ({{Ctrl.cartService.findTotal() | currency}})</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    
+<div class="shop-products container">
+  <div class="row">
+
+    <div ng-repeat="product in Ctrl.products | filter: {name: search} | filter: {status:'active'}:true" ng-click="Ctrl.gotoProduct(product.id)" class="col-sm-3 col-md-3 narrow-gutter">
+      <div class="tile" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false" ng-class="{'hovered':hovering}">
+        <img ng-src="{{product.image}}" class="img-responsive" alt="{{product.name}}">
+        <div class="overlay">
+          <p ng-bind="product.name"></p>
+          <p ng-bind="product.price | currency">Price</p>
+          <p>Click to View Details</p>
+        </div>
+      </div>
+      <div class="shop-products-info">
+        <p ng-bind="product.name"></p>
+       <!--  <p ng-bind="product.price | currency">Price</p> -->
+      </div>
+    </div>
+
+  </div>
+  <!-- end row -->
+</div>
+<!-- end shop-products container -->
+
+  

@@ -1,0 +1,89 @@
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="MainCtrl as Ctrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/products">_citypics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right">
+        <!-- <div class="form-group">
+          <input type="text" placeholder="Search" class="form-control">
+          <button type="submit" class="btn search-btn">Go</button>
+        </div> -->
+
+        <button class="btn btn-default cart-btn" ng-click="Ctrl.viewCart()"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> View Cart ({{Ctrl.cartService.findTotal() | currency}})</button>
+      </form>
+    </div><!--/.navbar-collapse -->
+  </div>
+</nav>
+
+<div class="product-details container">
+
+   	<div class="row text-left">
+        <div class="col-sm-4 col-sm-offset-1">
+            <img ng-src="{{Ctrl.product.image}}" class="img-responsive center-block" alt="{{Ctrl.product.name}}">
+        </div>
+
+        <div class="col-sm-7 product-details-info">
+            <div>
+                <h2 ng-bind="Ctrl.product.name" class="heading"></h2>
+                <p><span ng-bind="Ctrl.product.description"></span></p>
+                <p><span ng-bind="Ctrl.product.price | currency"></span></p>
+                <p>Category: <span ng-bind="Ctrl.product.category"></span></p>
+                <p>Quantity in Stock: <span ng-bind="Ctrl.product.quantity"></span></p>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" min="1" max="{{ctrl.product.quantity}}" class="form-control" ng-model="Ctrl.quantity" ng-change="Ctrl.quantity = Ctrl.fixQuantity(Ctrl.quantity)">
+            </div>
+            <div class="form-group" ng-hide="Ctrl.checkQuantity(Ctrl.product.quantity, Ctrl.quantity)" ng-if="Ctrl.quantity > 0">
+                <button class="btn btn-default cart-btn" ng-click="Ctrl.cartService.addtoCart(Ctrl.product, Ctrl.quantity)">Add to Cart</button>
+            </div>
+
+            <div class="continue-shopping-cta">
+                <a href="/#/products">Continue Shopping &rarr;</a>
+            </div>
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+
+</div>
+<!-- end product-details container -->
+
+<!--
+====
+
+
+        <div class="media-body">
+
+            <h2 ng-bind="Ctrl.product.name" class="media-heading"></h2>
+            <p ng-bind="Ctrl.product.description"></p>
+            <p ng-bind="Ctrl.product.category"></p>
+            
+            <h3><span ng-bind="Ctrl.product.price | currency"></span></h3>
+            
+            use later but only if user is admin <button ng-click="Ctrl.gotoEditProduct(product.productId)">Edit</button>
+            <form ng-submit="Ctrl.addtoCart(Ctrl.product, Ctrl.quantity)">
+                <div class="form-group modal-column">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control" ng-model="Ctrl.quantity">
+                </div>
+
+                <button>Add to Cart</button>
+            </form>
+
+        </div> 
+        <div class="media-left">
+        
+            change this to actual image later
+            <p><img src="http://lorempixel.com/400/400/animals" alt="placeholder"></p>
+        
+        </div>
+-->
+
